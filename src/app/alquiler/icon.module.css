@@ -1,0 +1,17 @@
+.iconPrimary {
+    filter: invert(85%) sepia(55%) saturate(4916%) hue-rotate(354deg) brightness(100%) contrast(101%);
+}
+
+.colorBg {
+    background-image: linear-gradient(to right, rgba(29, 174, 237, 0.96), rgba(234, 22, 140, .9) 50%, rgba(254, 223, 50, 0.944)), url(https://res.cloudinary.com/dppta0r5e/image/upload/v1698379065/static/6388af24a87c06f9efe573e1_img_imp_kwimrc.webp);
+    background-position: 0 0, 50% 30%;
+    background-repeat: repeat, no-repeat;
+    background-size: auto, cover;
+}
+
+.bkBg {
+    background-image: linear-gradient(#000000, #3b3b3be2, #000000), url(https://res.cloudinary.com/dppta0r5e/image/upload/v1698377416/static/638a72444e980234e0156957_Gray-Scale-Text_ctvygt.webp);
+    background-position: 0 0, 50% 30%;
+    background-repeat: repeat, no-repeat;
+    background-size: auto, cover;
+}

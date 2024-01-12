@@ -1,0 +1,115 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String?
+  password  String
+  createdAt DateTime @default(now())
+}
+
+model Brand {
+  id        Int      @id @default(autoincrement())
+  name      String @unique
+  equipment Equipment[]
+  rental    Rental[]
+  replaces  Replaces[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ReplaceBrand {
+  id        Int      @id @default(autoincrement())
+  name      String @unique
+  replaces  Replaces[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model EquipmentCategory {
+  id        Int      @id @default(autoincrement())
+  name      String @unique
+  equipment Equipment[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ReplaceCategory {
+  id        Int      @id @default(autoincrement())
+  name      String @unique
+  replaces  Replaces[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model RentalCategory {
+  id        Int      @id @default(autoincrement())
+  name      String @unique
+  rental    Rental[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Equipment {
+  id        Int      @id @default(autoincrement())
+  code      String
+  brand     Brand    @relation(fields: [brandId], references: [id])
+  brandId   Int
+  model     String
+  category  EquipmentCategory @relation(fields: [categoryId], references: [id])
+  categoryId Int
+  image     String?
+  gallery   String
+  features  String
+  description String?
+  moreFeatures String
+  brochure String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Rental {
+  id        Int      @id @default(autoincrement())
+  name      String
+  brand     Brand    @relation(fields: [brandId], references: [id])
+  brandId   Int
+  category  RentalCategory @relation(fields: [categoryId], references: [id])
+  categoryId Int
+  model     String
+  printLimit Int
+  typePlan  String
+  image     String?
+  features  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Replaces {
+  id        Int      @id @default(autoincrement())
+  name      String
+  shortCode String?
+  partNumber String?
+  brand     Brand?    @relation(fields: [brandId], references: [id])
+  brandId   Int?
+  compatibility String?
+  toBrand   ReplaceBrand?    @relation(fields: [toBrandId], references: [id])
+  toBrandId Int?
+  category  ReplaceCategory? @relation(fields: [categoryId], references: [id])
+  categoryId Int?
+  image     String?
+  gallery   String?
+  features  String?
+  description String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

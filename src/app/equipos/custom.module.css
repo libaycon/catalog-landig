@@ -1,0 +1,18 @@
+@media (max-width: 780px) {
+    .mediaQuery {
+        position: fixed;
+        backdrop-filter: blur(10px);
+        padding: 1rem;
+        inset: 0;
+        z-index: 10;
+    }
+    .sidebar {
+        max-width: 340px;
+        background: #000a1e;
+        max-height: calc(100vh - 2rem);
+    }
+    .sidebar__body {
+        max-height: max-content;
+        overflow-y: auto;
+    }
+}
